@@ -57,6 +57,26 @@ body {
   display: none !important;
 }
 
+.inputForm {
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.btnCrear {
+  border: 1px solid #a4a6b9;
+  border-radius: 10px;
+  background-color: #a4a6b9;
+  box-shadow: -5px -5px 20px #8f929b;
+}
+
+.btnCrear:hover {
+  transform: scale(1.1);
+  transition: transform 0.1s linear;
+  background-color: #4f7d88;
+  box-shadow: -5px -5px 20px #73757c;
+}
+
 .container-card {
   display: flex;
   justify-content: center;
@@ -94,6 +114,13 @@ body {
 .hiddenCard {
   display: none;
 }
+
+/* Lista de usuarios registrados */
+
+/* .listaUsuarios {
+  border: 1px solid orangered;
+  margin: 30px 40px;
+} */
 
 /* Footer */
 footer {

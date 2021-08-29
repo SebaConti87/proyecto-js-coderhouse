@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="icon" type="image/png" href="images/logo.png" />
     <!-- Bootstrap -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
@@ -14,9 +14,12 @@
       crossorigin="anonymous"
     />
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,500&display=swap"
+      rel="stylesheet"
+    />
     <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
     <title>JSC</title>
@@ -34,36 +37,13 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-item nav-link" href="index.html">Crear usuario</a>
-          <a class="nav-item nav-link" href="usuarios-registrados.html">Ver usuarios</a>
+          <a class="nav-item nav-link" href="">Ver usuarios</a>
         </div>
       </div>
     </nav>
 
-    <!-- Formulario para crear usuario -->
-    <div class="container-general" id="container-general">
-      <h2 class="titulo">CREA TU USUARIO</h1>
-
-      <div id="container-formulario">
-        <form class="form" id="formulario">
-          <label for="">Nombre de usuario:</label>
-          <input type="text" id="nickname" autocomplete="off" class="inputForm" placeholder="Nombre.."/>
-          <label for="">Elegí tu password:</label>
-          <input type="password" name="" id="pass" autocomplete="off" class="inputForm" placeholder="Password.."/>
-          <label for="">Repetí tu password:</label>
-          <input type="password" name="" id="pass2" autocomplete="off" class="inputForm" placeholder="Repite tu password.."/>
-          <label for="">Edad:</label>
-          <input type="text" id="edad" autocomplete="off" class="inputForm" placeholder="Edad.."/>
-          <label for="">Ingresa tu email:</label>
-          <input type="email" id="email" autocomplete="off" class="inputForm" placeholder="Email.."/>
-          <br />
-
-          <button type="button" id="btnCrear" class="btnCrear">CREAR USUARIO</button>
-        </form>
-      </div>
-    </div>
-
     <!-- Card de usuario creado -->
-    <div class="container-card">
+    <!-- <div class="container-card">
       <div id="card" class="usuarioCreado hiddenCard">
        <img src="images/profile-photo.png" alt="" class="foto-card" />
        <p class="pCard">Usuario:</p>
@@ -73,11 +53,19 @@
        <p class="pCard">Email:</p>
        <p id="emailCard" class="infoCard"></p>
       </div>
-     </div>
-    
+     </div> -->
 
     <!-- Lista de usuarios registrados -->
-    <div class="listaUsuarios"></div>
+    <div class="listaUsuarios">
+      <table id="tablaUsuarios">
+        <tr>
+          <th>Usuario</th>
+          <th>Edad</th>
+          <th>Email</th>
+          <th><a href="">Ver perfil</a></th>
+        </tr>
+      </table>
+    </div>
 
     <!-- Footer con link a Linkedin -->
     <footer>

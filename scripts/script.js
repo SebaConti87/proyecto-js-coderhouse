@@ -11,6 +11,9 @@ usuarios.push(
   { nickname: "Tucu", edad: 16, email: "tucutucu@gmail.com" }
 );
 
+//Sube el array usuarios al localStorage
+localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
 //Botón para crear usuario nuevo.
 let btnCrear = document.getElementById("btnCrear");
 btnCrear.addEventListener("click", crearUsuario);
@@ -22,7 +25,7 @@ function crearUsuario(e) {
   let nick = document.getElementById("nickname").value;
   let password = document.getElementById("pass").value;
   let repetirPassword = document.getElementById("pass2").value;
-  let edad = document.getElementById("edad").value;
+  let edad = parseInt(document.getElementById("edad").value);
   let email = document.getElementById("email").value;
 
   //Validación de password
@@ -47,7 +50,7 @@ function crearUsuario(e) {
     document.body.appendChild(bienvenida);
     bienvenida.classList.add("titulo");
 
-    //Agrega los datos recién cargados a la card.
+    //Agrega los datos recién cargados a la card
     cardNombre.innerHTML = nick;
     cardEdad.innerHTML = edad;
     cardEmail.innerHTML = email;
@@ -78,10 +81,6 @@ class Usuario {
     this.nickname = nickname;
     this.edad = edad;
     this.email = email;
-  }
-  //Método que avisa cuando el usuario se creó exitosamente.
-  usuarioCreado() {
-    alert(`El usuario ${this.nickname} ha sido creado con éxito.`);
   }
 }
 
