@@ -52,11 +52,6 @@ function crearUsuario(e) {
     let cardEdad = document.getElementById("edadCard");
     let cardEmail = document.getElementById("emailCard");
 
-    let bienvenida = document.createElement("h2");
-    bienvenida.innerText = `Bienvenido ${nick}`;
-    document.body.appendChild(bienvenida);
-    bienvenida.classList.add("titulo");
-
     //Agrega los datos recién cargados a la card
     cardNombre.innerHTML = nick;
     cardEdad.innerHTML = edad;
@@ -75,13 +70,6 @@ function crearUsuario(e) {
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
   }
 
-  let btnVerUsuarios = document.getElementById("verusuarios");
-  btnVerUsuarios.addEventListener("click", verUsuarios);
-
-  function verUsuarios() {
-    console.log("holaaa");
-  }
-
   //Lista de usuarios mostrados por consola.
   for (let i = 0; i < usuarios.length; i++) {
     console.log("Usuario " + (i + 1) + ": " + usuarios[i].nickname);
@@ -89,6 +77,21 @@ function crearUsuario(e) {
 
   //Aplicando el método length para contar los usuarios registrados.
   console.log(`Tenemos registrados ${usuarios.length} usuarios.`);
+}
+
+//Función para crear una tabla con los usuarios registrados hasta el momento. (Se ejecuta al cargar la página usuarios-registrados.html)
+function mostrarTablaUsuarios(e) {
+  let usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios"));
+
+  for (const usuario of usuariosRegistrados) {
+    let celda = document.createElement("tr");
+    celda.innerHTML = `<td>${usuario.nickname}</td>
+    <td>${usuario.edad}</td>
+    <td>${usuario.email}</td>
+          <td><a href="" id="cardUsuario">Ver perfil</a></td>
+    `;
+    document.getElementById("tbody").appendChild(celda);
+  }
 }
 
 //Clase para crear usuarios

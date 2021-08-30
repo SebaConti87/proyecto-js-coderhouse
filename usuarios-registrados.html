@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="style.css" />
     <title>JSC</title>
   </head>
-  <body>
+  <body onload="mostrarTablaUsuarios()">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="index.html">
@@ -37,9 +37,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-item nav-link" href="index.html">Crear usuario</a>
-          <a class="nav-item nav-link" href="#" id="verusuarios">
-            Ver usuarios
-          </a>
+          <a class="nav-item nav-link" href="#"> Ver usuarios </a>
         </div>
       </div>
     </nav>
@@ -68,14 +66,7 @@
             <th>Perfil</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><a href="">Ver perfil</a></td>
-          </tr>
-        </tbody>
+        <tbody id="tbody"></tbody>
       </table>
     </div>
 
