@@ -5,12 +5,12 @@ let listaUsuarios = JSON.parse(localStorage.getItem("usuarios"));
 
 //Usuarios creados por mi para que no haya un solo usuario cada vez que le haga refresh a la página.
 usuarios.push(
-  { nickname: "Carlitos", edad: 20, email: "carlitos20@gmail.com" },
-  { nickname: "Pepito123", edad: 18, email: "pepito@gmail.com" },
-  { nickname: "Cacho", edad: 45, email: "cacho@gmail.com" },
-  { nickname: "Pipo", edad: 34, email: "pipo90@gmail.com" },
-  { nickname: "Miguel", edad: 25, email: "miguelito@gmail.com" },
-  { nickname: "Tucu", edad: 16, email: "tucutucu@gmail.com" }
+  { id: 1, nickname: "Carlitos", edad: 20, email: "carlitos20@gmail.com" },
+  { id: 2, nickname: "Pepito123", edad: 18, email: "pepito@gmail.com" },
+  { id: 3, nickname: "Cacho", edad: 45, email: "cacho@gmail.com" },
+  { id: 4, nickname: "Pipo", edad: 34, email: "pipo90@gmail.com" },
+  { id: 5, nickname: "Miguel", edad: 25, email: "miguelito@gmail.com" },
+  { id: 6, nickname: "Tucu", edad: 16, email: "tucutucu@gmail.com" }
 );
 
 //Validación que sirve para no sobreescribir el localStorage
@@ -61,10 +61,13 @@ function crearUsuario(e) {
 
     card.classList.remove("hiddenCard");
 
-    formulario.classList.add("esconder-formulario");
+    formulario.classList.add("esconder-elemento");
 
+    //Le asigna un id al usuario nuevo
+    let contador = usuarios.length + 1;
+    let id = contador;
     //Crea usuario y se agrega al array Usuarios
-    let usuarioNuevo = new Usuario(nick, edad, email);
+    let usuarioNuevo = new Usuario(id, nick, edad, email);
     usuarios.push(usuarioNuevo);
 
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
@@ -80,23 +83,32 @@ function crearUsuario(e) {
 }
 
 //Función para crear una tabla con los usuarios registrados hasta el momento. (Se ejecuta al cargar la página usuarios-registrados.html)
+
 function mostrarTablaUsuarios(e) {
   let usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios"));
 
   for (const usuario of usuariosRegistrados) {
     let celda = document.createElement("tr");
-    celda.innerHTML = `<td>${usuario.nickname}</td>
+
+    celda.innerHTML = `
+    <td>${usuario.id}</td>
+    <td>${usuario.nickname}</td>
     <td>${usuario.edad}</td>
     <td>${usuario.email}</td>
-          <td><a href="" id="cardUsuario">Ver perfil</a></td>
+          <td class="text-center"><button type="button" onclick="verUsers()" class="">Ver perfil</button></td>
     `;
     document.getElementById("tbody").appendChild(celda);
   }
 }
 
+function verUsers() {
+  console.log(usuarios);
+}
+
 //Clase para crear usuarios
 class Usuario {
-  constructor(nickname, edad, email) {
+  constructor(id, nickname, edad, email) {
+    this.id = id;
     this.nickname = nickname;
     this.edad = edad;
     this.email = email;
@@ -104,7 +116,7 @@ class Usuario {
 }
 
 //Función para ordenar los usuarios por edad de menor a mayor usando el método sort()
-let usuariosOrdenados = usuarios.sort(function (a, b) {
-  return a.edad - b.edad;
-});
+// let usuariosOrdenados = usuarios.sort(function (a, b) {
+//   return a.edad - b.edad;
+// });
 // console.log(usuariosOrdenados);
