@@ -1,5 +1,7 @@
 //Array de usuarios registrados.
-const usuarios = [];
+let usuarios = [];
+//Chequeo de usuarios registrados en el localStorage hasta el momento.
+let listaUsuarios = JSON.parse(localStorage.getItem("usuarios"));
 
 //Usuarios creados por mi para que no haya un solo usuario cada vez que le haga refresh a la página.
 usuarios.push(
@@ -11,12 +13,17 @@ usuarios.push(
   { nickname: "Tucu", edad: 16, email: "tucutucu@gmail.com" }
 );
 
+//Validación que sirve para no sobreescribir el localStorage
+if (listaUsuarios != null) {
+  usuarios = listaUsuarios;
+}
+
 //Sube el array usuarios al localStorage
 localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
 //Botón para crear usuario nuevo.
 let btnCrear = document.getElementById("btnCrear");
-btnCrear.addEventListener("click", crearUsuario);
+if (btnCrear) btnCrear.addEventListener("click", crearUsuario);
 
 //Función para crear usuario con los datos del formulario.
 function crearUsuario(e) {
@@ -64,6 +71,15 @@ function crearUsuario(e) {
     //Crea usuario y se agrega al array Usuarios
     let usuarioNuevo = new Usuario(nick, edad, email);
     usuarios.push(usuarioNuevo);
+
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  }
+
+  let btnVerUsuarios = document.getElementById("verusuarios");
+  btnVerUsuarios.addEventListener("click", verUsuarios);
+
+  function verUsuarios() {
+    console.log("holaaa");
   }
 
   //Lista de usuarios mostrados por consola.

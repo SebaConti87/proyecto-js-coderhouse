@@ -117,10 +117,20 @@ body {
 
 /* Lista de usuarios registrados */
 
-/* .listaUsuarios {
+.tabla {
+  border: 1px solid blue;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+.listaUsuarios th {
   border: 1px solid orangered;
-  margin: 30px 40px;
-} */
+  padding: 3px 70px;
+}
+
+.listaUsuarios td {
+  border: 1px solid green;
+}
 
 /* Footer */
 footer {
