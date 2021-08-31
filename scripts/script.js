@@ -84,12 +84,13 @@ function crearUsuario(e) {
 
 //Función para crear una tabla con los usuarios registrados hasta el momento. (Se ejecuta al cargar la página usuarios-registrados.html)
 
-function mostrarTablaUsuarios(e) {
+function mostrarTablaUsuarios() {
   let usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios"));
 
   for (const usuario of usuariosRegistrados) {
     let celda = document.createElement("tr");
 
+    celda.setAttribute("id", usuario.id);
     celda.innerHTML = `
     <td>${usuario.id}</td>
     <td>${usuario.nickname}</td>
