@@ -96,14 +96,10 @@ function mostrarTablaUsuarios() {
     <td>${usuario.nickname}</td>
     <td>${usuario.edad}</td>
     <td>${usuario.email}</td>
-          <td class="text-center"><button type="button" onclick="verUsers()" class="">Ver perfil</button></td>
+          <td class="text-center"><button type="button" class="boton">Ver perfil</button></td>
     `;
     document.getElementById("tbody").appendChild(celda);
   }
-}
-
-function verUsers() {
-  console.log(usuarios);
 }
 
 //Clase para crear usuarios
@@ -121,3 +117,19 @@ class Usuario {
 //   return a.edad - b.edad;
 // });
 // console.log(usuariosOrdenados);
+
+//Función para elegir un usuario de la lista y mostrar su card
+$(document).on("click", ".boton", function () {
+  //Captura el número de la fila para saber qué usuario mostrar
+  let usuarioSeleccionado = $(".boton").index(this);
+
+  //Esconde la tabla
+  $(".tabla").addClass("esconder-elemento");
+  //Muestra la card
+  $("#card").removeClass("hiddenCard");
+
+  //Agrega los datos del usuario a la card
+  $("#cardNick").html(usuarios[usuarioSeleccionado].nickname);
+  $("#cardEdad").html(usuarios[usuarioSeleccionado].edad);
+  $("#cardEmail").html(usuarios[usuarioSeleccionado].email);
+});

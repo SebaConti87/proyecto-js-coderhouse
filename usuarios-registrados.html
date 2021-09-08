@@ -37,23 +37,12 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-item nav-link" href="index.html">Crear usuario</a>
-          <a class="nav-item nav-link" href="#"> Ver usuarios </a>
+          <a class="nav-item nav-link" href="usuarios-registrados.html">
+            Ver usuarios
+          </a>
         </div>
       </div>
     </nav>
-
-    <!-- Card de usuario creado -->
-    <!-- <div class="container-card">
-      <div id="card" class="usuarioCreado hiddenCard">
-       <img src="images/profile-photo.png" alt="" class="foto-card" />
-       <p class="pCard">Usuario:</p>
-       <p id="nickCard" class="infoCard"></p>
-       <p class="pCard">Edad:</p>
-       <p id="edadCard" class="infoCard"></p>
-       <p class="pCard">Email:</p>
-       <p id="emailCard" class="infoCard"></p>
-      </div>
-     </div> -->
 
     <!-- Lista de usuarios registrados -->
     <div class="tabla">
@@ -71,6 +60,19 @@
       </table>
     </div>
 
+    <!-- Card de usuario seleccionado -->
+    <div class="container-card">
+      <div id="card" class="usuarioCreado hiddenCard">
+        <img src="images/profile-photo.png" alt="" class="foto-card" />
+        <p class="pCard">Usuario:</p>
+        <p id="cardNick" class="infoCard"></p>
+        <p class="pCard">Edad:</p>
+        <p id="cardEdad" class="infoCard"></p>
+        <p class="pCard">Email:</p>
+        <p id="cardEmail" class="infoCard"></p>
+      </div>
+    </div>
+
     <!-- Footer con link a Linkedin -->
     <footer>
       <p>
@@ -82,6 +84,7 @@
       </p>
     </footer>
 
+    <script src="./scripts/jquery-3.6.0.min.js"></script>
     <script src="scripts/script.js"></script>
   </body>
 </html>
