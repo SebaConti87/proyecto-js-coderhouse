@@ -57,6 +57,14 @@
           <input type="text" id="edad" autocomplete="off" class="inputForm"/> 
           <label for="">Ingresa tu email:</label>
           <input type="email" id="email" autocomplete="off" class="inputForm" />
+          <label for="lenguajes">Elegí tu lenguaje de programación:</label>
+          <select id="lenguaje" class="inputForm" name="lenguajes">
+            <option value="javascript">Javascript</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+            <option value="c++">C++</option>
+          </select>
+          <br />
           <br />
 
           <button type="button" id="btnCrear" class="btnCrear">CREAR USUARIO</button>
@@ -67,7 +75,7 @@
     <!-- Card de usuario creado -->
     <div class="container-card">
       <div id="card" class="usuarioCreado hiddenCard">
-       <img src="images/profile-photo.png" alt="" class="foto-card" />
+       <img src="" alt="" class="foto-card" id="foto-lenguaje" />
        <p class="pCard">Usuario:</p>
        <p id="nickCard" class="infoCard"></p>
        <p class="pCard">Edad:</p>
@@ -82,6 +90,7 @@
 
     <!-- Footer con link a Linkedin -->
     <footer>
+    
       <p>
         Developed by
         <a href="https://www.linkedin.com/in/sebastianconti/" target="_blank"

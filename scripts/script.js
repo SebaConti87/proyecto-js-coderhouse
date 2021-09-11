@@ -5,12 +5,48 @@ let listaUsuarios = JSON.parse(localStorage.getItem("usuarios"));
 
 //Usuarios creados por mi para que no haya un solo usuario cada vez que le haga refresh a la página.
 usuarios.push(
-  { id: 1, nickname: "Carlitos", edad: 20, email: "carlitos20@gmail.com" },
-  { id: 2, nickname: "Pepito123", edad: 18, email: "pepito@gmail.com" },
-  { id: 3, nickname: "Cacho", edad: 45, email: "cacho@gmail.com" },
-  { id: 4, nickname: "Pipo", edad: 34, email: "pipo90@gmail.com" },
-  { id: 5, nickname: "Miguel", edad: 25, email: "miguelito@gmail.com" },
-  { id: 6, nickname: "Tucu", edad: 16, email: "tucutucu@gmail.com" }
+  {
+    id: 1,
+    nickname: "Carlitos",
+    edad: 20,
+    email: "carlitos20@gmail.com",
+    lenguaje: "javascript",
+  },
+  {
+    id: 2,
+    nickname: "Pepito123",
+    edad: 18,
+    email: "pepito@gmail.com",
+    lenguaje: "python",
+  },
+  {
+    id: 3,
+    nickname: "Cacho",
+    edad: 45,
+    email: "cacho@gmail.com",
+    lenguaje: "java",
+  },
+  {
+    id: 4,
+    nickname: "Pipo",
+    edad: 34,
+    email: "pipo90@gmail.com",
+    lenguaje: "c++",
+  },
+  {
+    id: 5,
+    nickname: "Miguel",
+    edad: 25,
+    email: "miguelito@gmail.com",
+    lenguaje: "javascript",
+  },
+  {
+    id: 6,
+    nickname: "Tucu",
+    edad: 16,
+    email: "tucutucu@gmail.com",
+    lenguaje: "python",
+  }
 );
 
 //Validación que sirve para no sobreescribir el localStorage
@@ -34,6 +70,7 @@ function crearUsuario(e) {
   let repetirPassword = document.getElementById("pass2").value;
   let edad = parseInt(document.getElementById("edad").value);
   let email = document.getElementById("email").value;
+  let lenguaje = document.getElementById("lenguaje").value;
 
   //Validación de password
   function validarPass(password, repetirPassword) {
@@ -57,8 +94,24 @@ function crearUsuario(e) {
     cardEdad.innerHTML = edad;
     cardEmail.innerHTML = email;
 
-    //Oculta el formulario y hace visible la card modificando el classList de los elementos.
+    switch (lenguaje) {
+      case "javascript":
+        $("#foto-lenguaje").attr("src", "images/javascript.png");
+        break;
+      case "python":
+        $("#foto-lenguaje").attr("src", "images/python.png");
+        break;
+      case "java":
+        $("#foto-lenguaje").attr("src", "images/java.png");
+        break;
+      case "c++":
+        $("#foto-lenguaje").attr("src", "images/c++.png");
+        break;
+      default:
+        console.log("Se asignó automaticamente Javascript");
+    }
 
+    //Oculta el formulario y hace visible la card modificando el classList de los elementos.
     card.classList.remove("hiddenCard");
 
     formulario.classList.add("esconder-elemento");
@@ -67,7 +120,7 @@ function crearUsuario(e) {
     let contador = usuarios.length + 1;
     let id = contador;
     //Crea usuario y se agrega al array Usuarios
-    let usuarioNuevo = new Usuario(id, nick, edad, email);
+    let usuarioNuevo = new Usuario(id, nick, edad, email, lenguaje);
     usuarios.push(usuarioNuevo);
 
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
@@ -104,11 +157,12 @@ function mostrarTablaUsuarios() {
 
 //Clase para crear usuarios
 class Usuario {
-  constructor(id, nickname, edad, email) {
+  constructor(id, nickname, edad, email, lenguaje) {
     this.id = id;
     this.nickname = nickname;
     this.edad = edad;
     this.email = email;
+    this.lenguaje = lenguaje;
   }
 }
 
@@ -125,6 +179,7 @@ $(document).on("click", ".boton", function () {
 
   //Esconde la tabla
   $(".tabla").addClass("esconder-elemento");
+
   //Muestra la card
   $("#card").removeClass("hiddenCard");
 
@@ -132,4 +187,22 @@ $(document).on("click", ".boton", function () {
   $("#cardNick").html(usuarios[usuarioSeleccionado].nickname);
   $("#cardEdad").html(usuarios[usuarioSeleccionado].edad);
   $("#cardEmail").html(usuarios[usuarioSeleccionado].email);
+
+  //Asigna foto del lenguaje del usuario a la card
+  switch (usuarios[usuarioSeleccionado].lenguaje) {
+    case "javascript":
+      $("#foto-lenguaje").attr("src", "images/javascript.png");
+      break;
+    case "python":
+      $("#foto-lenguaje").attr("src", "images/python.png");
+      break;
+    case "java":
+      $("#foto-lenguaje").attr("src", "images/java.png");
+      break;
+    case "c++":
+      $("#foto-lenguaje").attr("src", "images/c++.png");
+      break;
+    default:
+      console.log("Se asignó automaticamente Javascript");
+  }
 });
