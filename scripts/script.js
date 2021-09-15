@@ -178,7 +178,7 @@ $(document).on("click", ".boton", function () {
   let usuarioSeleccionado = $(".boton").index(this);
 
   //Esconde la tabla
-  $(".tabla").addClass("esconder-elemento");
+  $(".tabla").hide("fast");
 
   //Muestra la card
   $("#card").removeClass("hiddenCard");
@@ -187,6 +187,28 @@ $(document).on("click", ".boton", function () {
   $("#cardNick").html(usuarios[usuarioSeleccionado].nickname);
   $("#cardEdad").html(usuarios[usuarioSeleccionado].edad);
   $("#cardEmail").html(usuarios[usuarioSeleccionado].email);
+
+  //URL a la que se envían los datos con AJAX
+  const apiPosts = "https://jsonplaceholder.typicode.com/posts";
+
+  //Info a enviar
+  const dataUser = {
+    nombre: usuarios[usuarioSeleccionado].nickname,
+    edad: usuarios[usuarioSeleccionado].edad,
+    email: usuarios[usuarioSeleccionado].email,
+  };
+
+  //Enviamos con método POST de AJAX el usuario seleccionado
+  $.ajax({
+    method: "POST",
+    url: apiPosts,
+    data: dataUser,
+    success: function (response) {
+      console.log(
+        `Usuario ${usuarios[usuarioSeleccionado].nickname} cargado con éxito.`
+      );
+    },
+  });
 
   //Asigna foto del lenguaje del usuario a la card
   switch (usuarios[usuarioSeleccionado].lenguaje) {
@@ -205,4 +227,13 @@ $(document).on("click", ".boton", function () {
     default:
       console.log("Se asignó automaticamente Javascript");
   }
+});
+
+//Función que sirve para volver a mostrar la tabla y ocultar la card sin tener que cargar toda la página nuevamente.
+$(document).on("click", "#verLista", function () {
+  //Esconde la tabla
+  $(".tabla").show("fast");
+
+  //Muestra la card
+  $("#card").addClass("hiddenCard");
 });
