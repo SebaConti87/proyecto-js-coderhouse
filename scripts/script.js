@@ -3,7 +3,7 @@ let usuarios = [];
 //Chequeo de usuarios registrados en el localStorage hasta el momento.
 let listaUsuarios = JSON.parse(localStorage.getItem("usuarios"));
 
-//Usuarios creados por mi para que no haya un solo usuario cada vez que le haga refresh a la página.
+//Usuarios hardcodeados para mostrar algo en la lista antes de crear usuarios.
 usuarios.push(
   {
     id: 1,
@@ -57,7 +57,7 @@ if (listaUsuarios != null) {
 //Sube el array usuarios al localStorage
 localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-//Botón para crear usuario nuevo.
+//Botón para crear usuario nuevo utilizando getElement y addEventListener.
 let btnCrear = document.getElementById("btnCrear");
 if (btnCrear) btnCrear.addEventListener("click", crearUsuario);
 
@@ -94,6 +94,7 @@ function crearUsuario(e) {
     cardEdad.innerHTML = edad;
     cardEmail.innerHTML = email;
 
+    //Switch que sirve para asignar una imagen dependiendo el lenguaje seleccionado.
     switch (lenguaje) {
       case "javascript":
         $("#foto-lenguaje").attr("src", "images/javascript.png");
@@ -119,10 +120,12 @@ function crearUsuario(e) {
     //Le asigna un id al usuario nuevo
     let contador = usuarios.length + 1;
     let id = contador;
+
     //Crea usuario y se agrega al array Usuarios
     let usuarioNuevo = new Usuario(id, nick, edad, email, lenguaje);
     usuarios.push(usuarioNuevo);
 
+    //Actualiza la lista del localStorage con el último usuario registrado.
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
   }
 
@@ -136,7 +139,6 @@ function crearUsuario(e) {
 }
 
 //Función para crear una tabla con los usuarios registrados hasta el momento. (Se ejecuta al cargar la página usuarios-registrados.html)
-
 function mostrarTablaUsuarios() {
   let usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios"));
 
@@ -166,39 +168,39 @@ class Usuario {
   }
 }
 
-//Función para ordenar los usuarios por edad de menor a mayor usando el método sort()
-// let usuariosOrdenados = usuarios.sort(function (a, b) {
-//   return a.edad - b.edad;
-// });
-// console.log(usuariosOrdenados);
+// Función para ordenar los usuarios por edad de menor a mayor usando el método sort().
+let usuariosOrdenados = usuarios.sort(function (a, b) {
+  return a.edad - b.edad;
+});
+console.log(usuariosOrdenados);
 
 //Función para elegir un usuario de la lista y mostrar su card
 $(document).on("click", ".boton", function () {
   //Captura el número de la fila para saber qué usuario mostrar
   let usuarioSeleccionado = $(".boton").index(this);
 
-  //Esconde la tabla
+  //Esconde la tabla.
   $(".tabla").hide("fast");
 
-  //Muestra la card
+  //Muestra la card.
   $("#card").removeClass("hiddenCard");
 
-  //Agrega los datos del usuario a la card
+  //Agrega los datos del usuario a la card.
   $("#cardNick").html(usuarios[usuarioSeleccionado].nickname);
   $("#cardEdad").html(usuarios[usuarioSeleccionado].edad);
   $("#cardEmail").html(usuarios[usuarioSeleccionado].email);
 
-  //URL a la que se envían los datos con AJAX
+  //URL a la que se envían los datos con AJAX.
   const apiPosts = "https://jsonplaceholder.typicode.com/posts";
 
-  //Info a enviar
+  //Info a enviar.
   const dataUser = {
     nombre: usuarios[usuarioSeleccionado].nickname,
     edad: usuarios[usuarioSeleccionado].edad,
     email: usuarios[usuarioSeleccionado].email,
   };
 
-  //Enviamos con método POST de AJAX el usuario seleccionado
+  //Enviamos con método POST de AJAX el usuario seleccionado.
   $.ajax({
     method: "POST",
     url: apiPosts,
@@ -210,7 +212,7 @@ $(document).on("click", ".boton", function () {
     },
   });
 
-  //Asigna foto del lenguaje del usuario a la card
+  //Asigna foto del lenguaje del usuario a la card.
   switch (usuarios[usuarioSeleccionado].lenguaje) {
     case "javascript":
       $("#foto-lenguaje").attr("src", "images/javascript.png");
