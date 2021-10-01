@@ -168,12 +168,6 @@ class Usuario {
   }
 }
 
-// Función para ordenar los usuarios por edad de menor a mayor usando el método sort().
-let usuariosOrdenados = usuarios.sort(function (a, b) {
-  return a.edad - b.edad;
-});
-console.log(usuariosOrdenados);
-
 //Función para elegir un usuario de la lista y mostrar su card
 $(document).on("click", ".boton", function () {
   //Captura el número de la fila para saber qué usuario mostrar
