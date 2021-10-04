@@ -59,7 +59,7 @@ localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
 //Botón para crear usuario nuevo utilizando getElement y addEventListener.
 let btnCrear = document.getElementById("btnCrear");
-if (btnCrear) btnCrear.addEventListener("click", crearUsuario);
+btnCrear.addEventListener("click", crearUsuario);
 
 //Función para crear usuario con los datos del formulario.
 function crearUsuario(e) {
@@ -72,14 +72,12 @@ function crearUsuario(e) {
   let email = document.getElementById("email").value;
   let lenguaje = document.getElementById("lenguaje").value;
 
-  //Validación de password
-  function validarPass(password, repetirPassword) {
-    if (password != repetirPassword) {
-      alert("Ingrese el password correcto en ambos campos.");
-    }
+  //Validar password.
+  if (password != repetirPassword) {
+    alert("La contraseña debe ser igual en ambos campos.");
+    location.reload();
+    return;
   }
-
-  validarPass(password, repetirPassword);
 
   //Validación de campos completos.
   if (nick != "" && edad != "" && email != "") {
