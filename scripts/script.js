@@ -79,6 +79,20 @@ function crearUsuario(e) {
     return;
   }
 
+  //Validar edad.
+  if (isNaN(edad)) {
+    alert("La edad debe ser ingresada en numeros y debe ser menor a 100.");
+    location.reload();
+    return;
+  }
+
+  //Validar email.
+  if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+    alert("Ingrese un mail válido.");
+    location.reload();
+    return;
+  }
+
   //Validación de campos completos.
   if (nick != "" && edad != "" && email != "") {
     let card = document.getElementById("card");
@@ -125,15 +139,9 @@ function crearUsuario(e) {
 
     //Actualiza la lista del localStorage con el último usuario registrado.
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  } else {
+    alert("Los campos no pueden estar vacios ");
   }
-
-  //Lista de usuarios mostrados por consola.
-  for (let i = 0; i < usuarios.length; i++) {
-    console.log("Usuario " + (i + 1) + ": " + usuarios[i].nickname);
-  }
-
-  //Aplicando el método length para contar los usuarios registrados.
-  console.log(`Tenemos registrados ${usuarios.length} usuarios.`);
 }
 
 //Función para crear una tabla con los usuarios registrados hasta el momento. (Se ejecuta al cargar la página usuarios-registrados.html)
