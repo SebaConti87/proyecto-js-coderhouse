@@ -1,13 +1,37 @@
-body {
-  background-color: #e4d8dc;
-  font-family: "Roboto", sans-serif;
-  color: #1c1427;
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap");
+
+* {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: #1c1427;
+  background: rgb(255, 197, 146);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 197, 146, 1) 0%,
+    rgba(255, 93, 178, 1) 100%
+  );
+}
+
+label {
+  font-weight: 700;
+}
+
 /* NavBar */
 .navbar {
   padding: 0;
+  height: 60px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  padding: 0;
+  margin: 0;
 }
 
 .navbar-collapse {
@@ -17,25 +41,15 @@ body {
 }
 
 .logo {
-  margin-left: 10px;
-  max-width: 50%;
+  margin-left: 30px;
+  max-width: 40%;
   height: auto;
-}
-
-/* Container general del formulario */
-.container-general {
-  background-color: #c9ccd5;
-  box-shadow: -5px -5px 20px #b6bac5;
-  border-radius: 10px;
-  margin: 5vh 20vh;
-  /* border: 1px solid violet; */
-  padding-bottom: 2vh;
 }
 
 .titulo {
   top: 60px;
   text-align: center;
-  padding: 20px;
+  padding: 10px 0 0;
   color: #1c1427;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
@@ -43,12 +57,14 @@ body {
 .container-general div {
   display: flex;
   justify-content: center;
+  padding: 0 30px;
 }
 
 .form {
   display: flex;
   flex-flow: column;
   justify-content: flex-end;
+  width: 40%;
 }
 
 .esconder-elemento {
@@ -56,44 +72,20 @@ body {
 }
 
 .inputForm {
-  border: none;
-  border-bottom: 1px solid grey;
-  border-right: 1px thin grey;
-  border-radius: 5px;
-  outline: none;
-  margin: 3px;
+  margin: 15px 0;
 }
 
 .btnCrear {
-  border: 1px solid #a4a6b9;
-  border-radius: 10px;
-  background-color: #a4a6b9;
-  box-shadow: -5px -5px 20px #8f929b;
+  width: 60%;
+  margin: 0 auto;
 }
 
 .btnCrear:hover {
   transform: scale(1.1);
-  transition: transform 0.1s linear;
-  background-color: #4f7d88;
-  box-shadow: -5px -5px 20px #73757c;
-}
-
-.container-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50px;
-}
-.usuarioCreado {
-  border-radius: 20px;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  min-width: 250px;
-  padding: 5px;
-  font-size: 1rem;
-  background-color: #c8bdca;
-  box-shadow: -5px -5px 20px #b6bac5;
+  transition: transform 0.1s ease-out;
+  background-color: rgb(53, 145, 251);
+  color: #ffff;
+  box-shadow: 1px 1px 20px 1px rgb(0, 0, 0, 0.2);
 }
 
 .foto-card {
@@ -102,42 +94,16 @@ body {
   border-radius: 50%;
 }
 
-.pCard {
-  font-size: small;
-  margin-bottom: 2px;
-  color: #4f7d88;
-}
-
-.infoCard {
-  background-color: #e4d8dc;
-}
 .hiddenCard {
   display: none;
 }
 
 /* Lista de usuarios registrados */
+
 .tabla {
-  display: flex;
-  justify-content: center;
   margin-top: 40px;
   margin-bottom: 50px;
-}
-.listaUsuarios th {
-  border: 1px solid black;
-  padding: 3px 70px;
-  background-color: #7991a5;
-}
-
-.listaUsuarios td {
-  border: 1px solid black;
-  background-color: #f8f9fa;
-}
-
-.listaUsuarios button {
-  background-color: transparent;
-  border: none;
-  color: blue;
-  text-decoration: underline;
+  text-align: center;
 }
 
 /* Footer */
@@ -152,7 +118,7 @@ footer {
 }
 footer p {
   margin: 0;
-  padding: 5px;
+  padding: 0;
 }
 footer a {
   color: blue;
@@ -161,4 +127,8 @@ footer a {
 }
 footer a:visited {
   color: blue;
+}
+
+footer code {
+  color: #1c1427;
 }

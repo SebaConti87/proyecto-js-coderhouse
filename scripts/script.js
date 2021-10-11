@@ -1,10 +1,36 @@
-//Array de usuarios registrados.
-let usuarios = [];
-//Chequeo de usuarios registrados en el localStorage hasta el momento.
-let listaUsuarios = JSON.parse(localStorage.getItem("usuarios"));
+//Clase para crear usuarios
+class Usuario {
+  constructor(id, nickname, edad, email, lenguaje) {
+    this.id = id;
+    this.nickname = nickname;
+    this.edad = edad;
+    this.email = email;
+    this.lenguaje = lenguaje;
+  }
 
-//Usuarios hardcodeados para mostrar algo en la lista antes de crear usuarios.
-usuarios.push(
+  //Método para asociar un lenguaje e imagen a cada usuario.
+  elegirLenguaje() {
+    switch (this.lenguaje) {
+      case "javascript":
+        $("#foto-lenguaje").attr("src", "images/javascript.png");
+        break;
+      case "python":
+        $("#foto-lenguaje").attr("src", "images/python.png");
+        break;
+      case "java":
+        $("#foto-lenguaje").attr("src", "images/java.png");
+        break;
+      case "c++":
+        $("#foto-lenguaje").attr("src", "images/c++.png");
+        break;
+      default:
+        console.log("Se asignó automaticamente Javascript");
+    }
+  }
+}
+
+//Array de usuarios registrados.
+let usuarios = [
   {
     id: 1,
     nickname: "Carlitos",
@@ -46,20 +72,32 @@ usuarios.push(
     edad: 16,
     email: "tucutucu@gmail.com",
     lenguaje: "python",
-  }
-);
+  },
+];
+
+//Chequeo de usuarios registrados en el localStorage hasta el momento.
+let listaUsuarios = JSON.parse(localStorage.getItem("usuarios"));
 
 //Validación que sirve para no sobreescribir el localStorage
 if (listaUsuarios != null) {
   usuarios = listaUsuarios;
 }
 
+// Usar clase Usuario para usuarios hardcodeados
+const usuariosHardcodeados = usuarios.map(
+  (item) =>
+    new Usuario(item.id, item.nick, item.edad, item.email, item.lenguaje)
+);
+
+//Pushea usuarios hardcodeados a usuarios
+usuariosHardcodeados.push(usuarios);
+
 //Sube el array usuarios al localStorage
 localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
 //Botón para crear usuario nuevo utilizando getElement y addEventListener.
 let btnCrear = document.getElementById("btnCrear");
-btnCrear.addEventListener("click", crearUsuario);
+if (btnCrear) btnCrear.addEventListener("click", crearUsuario);
 
 //Función para crear usuario con los datos del formulario.
 function crearUsuario(e) {
@@ -74,22 +112,41 @@ function crearUsuario(e) {
 
   //Validar password.
   if (password != repetirPassword) {
-    alert("La contraseña debe ser igual en ambos campos.");
-    location.reload();
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "La contraseña deben ser iguales en ambos campos",
+    });
+
     return;
   }
 
-  //Validar edad.
+  //Validar edad sea un numero valido y menor a 100.
   if (isNaN(edad)) {
-    alert("La edad debe ser ingresada en numeros y debe ser menor a 100.");
-    location.reload();
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "La edad debe ingresarse con números.",
+    });
     return;
+  } else {
+    if (edad >= 100) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "La edad debe ser menor a 100.",
+      });
+      return;
+    }
   }
 
   //Validar email.
   if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-    alert("Ingrese un mail válido.");
-    location.reload();
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Debes ingresar un email válido.",
+    });
     return;
   }
 
@@ -106,24 +163,6 @@ function crearUsuario(e) {
     cardEdad.innerHTML = edad;
     cardEmail.innerHTML = email;
 
-    //Switch que sirve para asignar una imagen dependiendo el lenguaje seleccionado.
-    switch (lenguaje) {
-      case "javascript":
-        $("#foto-lenguaje").attr("src", "images/javascript.png");
-        break;
-      case "python":
-        $("#foto-lenguaje").attr("src", "images/python.png");
-        break;
-      case "java":
-        $("#foto-lenguaje").attr("src", "images/java.png");
-        break;
-      case "c++":
-        $("#foto-lenguaje").attr("src", "images/c++.png");
-        break;
-      default:
-        console.log("Se asignó automaticamente Javascript");
-    }
-
     //Oculta el formulario y hace visible la card modificando el classList de los elementos.
     card.classList.remove("hiddenCard");
 
@@ -135,12 +174,17 @@ function crearUsuario(e) {
 
     //Crea usuario y se agrega al array Usuarios
     let usuarioNuevo = new Usuario(id, nick, edad, email, lenguaje);
+    usuarioNuevo.elegirLenguaje();
     usuarios.push(usuarioNuevo);
 
     //Actualiza la lista del localStorage con el último usuario registrado.
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
   } else {
-    alert("Los campos no pueden estar vacios ");
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Todos los campos deben estar completos.",
+    });
   }
 }
 
@@ -157,20 +201,9 @@ function mostrarTablaUsuarios() {
     <td>${usuario.nickname}</td>
     <td>${usuario.edad}</td>
     <td>${usuario.email}</td>
-          <td class="text-center"><button type="button" class="boton">Ver perfil</button></td>
+          <td class="text-center"><button type="button" class="btn btn-primary boton"><i class="fas fa-eye"></i></button></td>
     `;
     document.getElementById("tbody").appendChild(celda);
-  }
-}
-
-//Clase para crear usuarios
-class Usuario {
-  constructor(id, nickname, edad, email, lenguaje) {
-    this.id = id;
-    this.nickname = nickname;
-    this.edad = edad;
-    this.email = email;
-    this.lenguaje = lenguaje;
   }
 }
 
